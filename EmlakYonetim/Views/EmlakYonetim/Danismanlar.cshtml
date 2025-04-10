@@ -1,0 +1,79 @@
+﻿@using PagedList.Core
+@using PagedList.Core.Mvc
+@addTagHelper *,PagedList.Core.Mvc
+@{
+    ViewData["Title"] = "Danismanlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IPagedList<Danisman>
+
+
+<form asp-controller="EmlakYonetim" asp-action="Danismanlar" method="post">
+    <div class="container">
+        <div class="row" style="padding:1%">
+            <div class="col" style="margin-left:-25px">
+                <input type="text" class="form-control" name="Aranan" value="@ViewData["Aranan"]" placeholder="ARA" />
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Ara</button>
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Danismanlar","EmlakYonetim")';">Temizle</button>
+
+            </div>
+        </div>
+    </div>
+</form>
+<h1>Danismanlar</h1>
+
+<table class="table  table-hover table-bordered">
+    <thead>
+        <tr>
+
+            <td>Ad </td>
+            <td>Soyad</td>
+            <td>Telefon</td>
+            <td>ePosta</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null && Model.Count > 0)
+            {
+                foreach (var r in Model)
+                {
+                    <tr>
+
+                        <td>@r.Ad</td>
+                        <td>@r.Soyad</td>
+                        <td>@r.Telefon</td>
+                        <td>@r.ePosta</td>
+
+
+                    </tr>
+                }
+                <tr>
+                    <td colspan="10">
+                        <div class="text-center">
+                            <pager list="@Model" options="@PagedListRenderOptions.Bootstrap4Full" class="pagination justify-content-center" asp-controller="EmlakYonetim" asp-action="Danismanlar" asp-route-Aranan="@ViewData["Aranan"]" />
+                            Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.
+                        </div>
+
+                    </td>
+                </tr>
+            }
+            else
+            {
+                    <tr>
+                        <td colspan="10">
+                            <div class="text-center"> Kayıt Bulunamadı</div>
+                        </td>
+                    </tr>
+            }
+
+        }
+        
+           
+    </tbody>
+</table>
+

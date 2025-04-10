@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "AdminDuzenle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>AdminDuzenle</h1>
+
+@model Admin
+<h1>Profil Sayfası</h1>
+<form asp-action="AdminDuzenle" asp-controller="Admin" method="post">
+    <div class="row">
+        <div class="mx-auto col-md-7" style="padding:1%">
+            <label asp-for="Eposta">E Posta:</label>
+            <input asp-for="Eposta" type="email" class="form-control" required />
+        </div>
+        <div class="mx-auto col-md-7" style="padding:1%">
+            <label asp-for="Sifre">Şifre:</label>
+            <input asp-for="Sifre" class="form-control" required type="password" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="mx-auto col-md-7" style="padding:1%; text-align:right;">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Index","AdminDuzenle")';">İptal</button>
+        </div>
+    </div>
+
+
+</form>

@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Emlaklar";
+}
+
+@model List<IlanPaylasma>
+
+
+<div class="col-sm-6 col-xs-12 sonuc-secim">
+
+	<div class="col-sm-6" style="margin-left:400px;">
+		<div class="form-group">
+			<select id="pref-perpage" class="form-control">
+				<option selected="selected" value="10">Sıralama Seçenekleri</option>
+				<option value="11">Fiyata Göre, Artan</option>
+				<option value="22">Fiyata Göre, Azalan</option>
+				<option value="33">Güncelleme Tarihine Göre, Artan</option>
+				<option value="44">Güncelleme Tarihine Göre, Azalan</option>
+				<option value="55">Giriş Tarihine Göre, Artan</option>
+				<option value="66">Giriş Tarihine Göre, Azalan</option>
+				<option value="77">Metrekareye Göre, Artan</option>
+				<option value="88">Metrekareye Göre, Azalan</option>
+				<option value="99">Oda Sayısına Göre, Artan</option>
+				<option value="111">Oda Sayısına Göre, Azalan</option>
+				<option value="125423">Konuma Göre, A-Z</option>
+				<option value="333">Konuma Göre, Z-A</option>
+			</select>
+		</div>
+	</div>
+</div>
+<div style="margin-left:400px;margin-top:50px; text-align:center">
+  <table class="table table-striped table-hover table-bordered " >
+	<thead>
+		<tr>
+			<th>İlan Resim</th>
+			<th>İlan Açıklaması</th>
+			<th>Fiyat</th>
+			<th>m2</th>
+			<th>Oda</th>
+			<th>Konum</th>
+		</tr>
+	</thead>
+	<tbody>
+		@{
+				
+			 foreach (var i in Model)
+			 {
+				 
+				<tr>
+					<td><a asp-action="EmlaklarDetay" asp-route-ID="@i.ID">@i.Foto</a></td>
+					<td>@i.Aciklama</td>
+					<td>@i.Fiyat</td>
+					<td>@i.MetreKare</td>
+					<td>@i.OdaSayisi</td>
+					<td>@i.Il</td>
+				</tr>
+					
+			 }
+		  
+		}
+	</tbody>
+  </table>
+</div>
+
+
+<div class="containern-sayfa" >
+	<div class="row" >
+		<div class="col-sm-3 arama-detay" >
+				<div class="arama-detay-kutu">
+					<h4>Kategori Seç</h4>
+					<div class="form-group">
+						<select id="pref-perpage" class="form-control">
+							<option selected="selected" value="10">Konut</option>
+							<option value="15">İşyeri</option>
+							<option value="20">Arsa</option>
+						</select>
+					</div>
+				</div>
+				<div class="arama-detay-kutu">
+					<h4>Aranacak Kelime</h4>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Aranacak Kelime Girin">
+					</div>
+				</div>
+				<div class="arama-detay-kutu">
+					<h4>Konum Seçin</h4>
+					<div class="form-group">
+						<select id="pref-perpage" class="form-control">
+							<option selected="selected" value="10">İl</option>
+							<option value="15">İstanbul</option>
+							<option value="20">Ankara</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select id="pref-perpage" class="form-control">
+							<option selected="selected" value="10">İlçe</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select id="pref-perpage" class="form-control">
+							<option selected="selected" value="10">Semt</option>
+						</select>
+					</div>
+				</div>
+				<div class="arama-detay-kutu">
+					<h4>Metrekare Girin (m2)</h4>
+					<div class="form-group col-xs-6">
+						<input type="text" class="form-control" placeholder="Min m2">
+					</div>
+					<div class="form-group col-xs-6">
+						<input type="text" class="form-control" placeholder="Max m2">
+					</div>
+				</div>
+				<div class="arama-detay-kutu">
+					<h4>Fiyat Girin (TL)</h4>
+					<div class="form-group col-xs-6">
+						<input type="text" class="form-control" placeholder="Min TL">
+					</div>
+					<div class="form-group col-xs-6">
+						<input type="text" class="form-control" placeholder="Max TL">
+					</div>
+				</div>
+				<h4>İlan Tarihi</h4>
+				<div class="arama-detay-kutu">
+					<div class="radio-inline form-group-secim">
+						<label><input type="radio" name="optradio" /> Bugün</label><br>
+						<label><input type="radio" name="optradio"> Son 3 gün</label><br>
+						<label><input type="radio" name="optradio"> Son 7 gün</label>
+					</div>
+				</div>
+				<h4>İlan Sahibi</h4>
+				<div class="arama-detay-kutu">
+					<div class="radio-inline form-group-secim">
+						<label><input type="radio" name="optradio"> Sahibinden</label><br>
+						<label><input type="radio" name="optradio"> Emlak Ofisi </label><br>
+						<label><input type="radio" name="optradio"> İnşaat Firması</label>
+					</div>
+				</div>
+				<h4>Oda + Salon</h4>
+				<div class="arama-detay-kutu">
+					<div class="checkbox-inline form-group-secim">
+						<label><input type="checkbox" value=""> 1+1 </label><span> (111.149)</span><br>
+						<label><input type="checkbox" value=""> 2+1 </label><span> (47.149)</span><br>
+						<label><input type="checkbox" value=""> 3+1 </label><span> (132.149)</span><br>
+						<label><input type="checkbox" value=""> 4+1 </label><span> (57.149)</span><br>
+					</div>
+				</div>
+				<h4>Bina Yaşı</h4>
+				<div class="arama-detay-kutu">
+					<div class="checkbox-inline form-group-secim">
+						<label><input type="checkbox" value=""> 1-5 </label><span> (111.149)</span><br>
+						<label><input type="checkbox" value=""> 5-10 </label><span> (47.149)</span><br>
+						<label><input type="checkbox" value=""> 10-15 </label><span> (132.149)</span><br>
+						<label><input type="checkbox" value=""> 15-20 </label><span> (57.149)</span><br>
+					</div>
+				</div>
+				<h4>Bulunduğu Kat</h4>
+				<div class="arama-detay-kutu">
+					<div class="radio-inline form-group-secim">
+						<label><input type="radio" value=""> 1 </label><span> (111.149)</span><br>
+						<label><input type="radio" value=""> 2 </label><span> (47.149)</span><br>
+						<label><input type="radio" value=""> 3 </label><span> (132.149)</span><br>
+						<label><input type="radio" value=""> 4 ve üzeri </label><span> (57.149)</span><br>
+						<label><input type="radio" value=""> Villa Katı </label><span> (57.149)</span><br>
+					</div>
+				</div>
+				<h4>Kat Sayısı</h4>
+				<div class="arama-detay-kutu">
+					<div class="radio-inline form-group-secim">
+						<label><input type="radio" value=""> 1 </label><span> (111.149)</span><br>
+						<label><input type="radio" value=""> 2 </label><span> (47.149)</span><br>
+						<label><input type="radio" value=""> 3 </label><span> (132.149)</span><br>
+						<label><input type="radio" value=""> 4 ve üzeri </label><span> (57.149)</span><br>
+					</div>
+				</div>
+			</div>
+			
+	</div>
+</div>
+
+
+
+	

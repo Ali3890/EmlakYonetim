@@ -1,0 +1,98 @@
+﻿@using PagedList.Core
+@using PagedList.Core.Mvc
+@addTagHelper *,PagedList.Core.Mvc
+@{
+    ViewData["Title"] = "Randevularım";
+    var kullaniciID = Context.Session.GetString("kullaniciID");
+    /*if (adminID == null)
+    {
+        Context.Response.Redirect("/Login/Index");
+    }*/
+    var Eposta = Context.Session.GetString("Eposta");
+
+}
+@model IPagedList<Randevu>
+
+
+<form asp-controller="EmlakYonetim" asp-action="Randevularım" method="post">
+    <div class="container">
+        <div class="row" style="padding:1%">
+            <div class="col" style="margin-left:-25px">
+                <input type="text" class="form-control" name="Aranan" value="@ViewData["Aranan"]" placeholder="ARA" />
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Ara</button>
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Randevularım","EmlakYonetim")';">Temizle</button>
+               
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<h1>Randevularım</h1>
+
+<table class="table  table-hover table-bordered">
+    <thead>
+        <tr>
+            
+            <td>Ad Soyad</td>
+            <td>Telefon</td>
+            <td>E-posta</td>
+            <td>Emlakçı</td>
+            <td>İlan No</td>
+            <td>Randevu Tarihi</td>
+            <td>Randevu Saati</td>
+            <td>İşlem</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null && Model.Count > 0)
+            {
+                
+                foreach (var r in Model)
+                {
+                    if (@Eposta==r.ePosta)
+                    {
+                        <tr>
+                   
+                            <td>@r.adSoyad</td>
+                            <td>@r.tel</td>
+                            <td>@r.ePosta</td>
+                            <td>@r.emlakci</td>
+                            <td>@r.ilanNo</td>
+                            <td>@r.randevuTarihi</td>
+                            <td>@r.randevuSaati</td>
+                            <td>
+                                <a asp-controller="EmlakYonetim" asp-action="Randevuİptal" asp-route-ID="@r.ID" class="btn btn-danger">İptal Et</a>
+                                <a asp-controller="EmlakYonetim" asp-action="RandevuDuzenle" asp-route-ID="@r.ID" class="btn btn-primary">Düzenle</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+                        <tr>
+                            <td colspan="10">
+                                <div class="text-center">
+                                <pager list="@Model" options="@PagedListRenderOptions.Bootstrap4Full" class="pagination justify-content-center" asp-controller="EmlakYonetim" asp-action="Randevularım" asp-route-Aranan="@ViewData["Aranan"]" />
+                                    Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.
+                                </div>
+
+                            </td>
+                        </tr>
+                  
+            }
+            else
+            {
+            <tr>
+                <td colspan="10">
+                    <div class="text-center"> Randevu Bulunamadı</div>
+                </td>
+            </tr>
+            }
+          
+        }
+    </tbody>
+</table>

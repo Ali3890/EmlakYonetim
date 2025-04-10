@@ -1,0 +1,134 @@
+﻿@using PagedList.Core
+@using PagedList.Core.Mvc
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *,PagedList.Core.Mvc
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="container">
+    <div class="row" style="padding:1%">
+        <div class="col-6" style="margin-left:-25px">
+            <select id="SeciliIlan" asp-items="@ViewBag.Ilanlar" class="form-select">
+                <option>İlan Seçiniz</option>
+            </select>
+        </div>
+      
+        <div class="col">
+            <a id="Ata" asp-controller="Admin" asp-action="Ekle" class="btn btn-primary">Ekle</a>
+        </div>
+    </div>
+   
+
+</div>
+
+<div  class="container">
+  <div class="row">
+    <div class="col-lg-10">
+        <h1 class="page-header">
+            Öne Çıkan İlanlar
+        </h1>
+    </div>
+          @{
+           if (Model != null && Model.Count > 0)
+           {
+                int i = Convert.ToInt32(Model.FirstItemOnPage);
+                foreach (var d in Model)
+                {
+         
+
+                    <div class=" col-md-3 ">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Limak İnşaat</h4>
+                            </div>
+                            <div class="panel-body">
+                                <img src="~/img/res.jpg" alt="">
+                                <table class="table table-striped">
+                                    <tbody class="">
+                                        <tr>
+                                            <th>Sat / Kir</th>
+                                            <th class="table-bilgi">@d.EmlakTipi</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Fiyat</th>
+                                            <th class="table-bilgi">@d.Fiyat</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Alan m2</th>
+                                            <th class="table-bilgi">@d.MetreKare</th>
+                                        </tr>
+                                        <tr>
+                                            <th>İl</th>
+                                            <th class="table-bilgi">@d.Il</th>
+                                        </tr>
+                                        <tr>
+                                            <th>İlçe</th>
+                                            <th class="table-bilgi">@d.Ilce</th>
+                                        </tr>
+                                        <tr>
+                                            <th>İlan Tarihi</th>
+                                            <th class="table-bilgi">@d.IlanTarihi</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                        <a asp-controller="Admin" asp-action="Sil" asp-route-ID="@d.ID" class="btn btn-primary btn-block panel-btn-detay">Sil </a>
+                            </div>
+                        </div>
+                    </div>
+          
+                    i = i + 1;
+                }
+
+                            <tr>
+                                <td colspan="8">
+                                    <div class="text-center">
+                                        <pager list="@Model" options="@PagedListRenderOptions.Bootstrap4Full" class="pagination justify-content-center" asp-controller="Admin" asp-action="Index"  />
+                                        Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.
+                                    </div>
+
+                                </td>
+                            </tr>
+           }
+           else
+           {
+              <tr>
+                    <td colspan="8">
+                         <div class="text-center"> Kayıt Bulunamadı</div>
+                    </td>
+              </tr>
+           }
+        }
+  </div>
+</div>
+
+
+
+@section Scripts
+{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#SeciliIlan").select2();
+        });
+      
+        $("#Ata").click(function (e) {
+            e.preventDefault();
+            var e = document.getElementById("SeciliIlan");
+
+            var SeciliIlan = e.value;
+
+            if (SeciliIlan > 0) {
+                window.location.href = "/Admin/Ekle/?Ilanid=" + SeciliIlan;
+            }
+            else {
+                window.alert("Önce İlan Seçiniz");
+            }
+        })
+    </script>
+}

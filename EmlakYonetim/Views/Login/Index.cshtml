@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = null;
+}
+@model Kullanici
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h3 class="text-center mt-5"></h3>
+                <form style="width:40%; position:absolute;margin-left:auto%;margin-top:5%;" class="p-4 p-md-5 border rounded-3 bg-body-tertiary" asp-controller="Login" asp-action="GirisYap" method="post">
+                    <div style="" class="form-floating mb-3">
+                        <label for="floatingInput"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">E-posta adresi</font></font></label>
+                        <br>
+                        <input asp-for="ePosta" type="email" class="form-control" id="floatingInput" placeholder="isim@example.com">
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label for="floatingPassword"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Şifre</font></font></label>
+                        <br>
+                        <input asp-for="Sifre" type="password" class="form-control " id="floatingPassword" placeholder="Şifre">
+
+                    </div>
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"><font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">
+                                    Beni Hatırla
+                                </font>
+                            </font>
+                        </label>
+                    </div>
+                    <div style="text-align: right; margin-top: 10px;">
+
+                        <a href="SifremiUnuttum" style="font-size: 14px; text-decoration: none; color: blue;">
+                            Şifremi Unuttum?
+                        </a>
+
+
+                    </div>
+
+                    <button style=" position:absolute;margin-left:15%;margin-top:0%;" class="w-10 btn btn-lg btn-primary" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Giriş Yap</font></font></button>
+
+                    <a style=" position:absolute;margin-left:45%;margin-top:0%;" class="w-10 btn btn-lg btn-primary" asp-controller="Login" asp-action="KayitOl">Kayıt Ol</a>
+
+
+                    @* <font style="vertical-align: inherit;"><font style="vertical-align: inherit; "><a style="color:white;" href="KayitOl"> Kayıt Ol </a></font></font></button> *@
+                    <br />
+                    <br />
+                    <br />
+                    @* <small class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kayıt ol'a tıklayarak kullanım şartlarını kabul etmiş olursunuz.</font></font></small> *@
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Hata</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    @TempData["Hata"] <!-- Razor'da hata mesajını buraya ekler -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+         // Sayfa yüklendiğinde modalın açılması için Razor'dan gelen kontrol
+        document.addEventListener('DOMContentLoaded', function () {
+        @if (TempData["Hata"] != null)
+        {
+
+            <text>
+                     var modalElement = document.getElementById('errorModal');
+                     var modalInstance = new bootstrap.Modal(modalElement);
+                     modalInstance.show();
+            </text>
+        }
+         } );
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "OdemeDuzenle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model Odeme
+
+<h2>Ödeme Düzenleme Formu</h2>
+<form asp-action="OdemeDuzenle" asp-controller="Admin" method="post" class="needs-validation" novalidate>
+    <!-- Ad Soyad -->
+    <div class="mb-3">
+        <label asp-for="adSoyad" class="form-label">Ad Soyad:</label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+            <input asp-for="adSoyad" type="text" class="form-control" required pattern="[A-Za-zğüşöçİĞÜŞÖÇ\s]+"
+                   placeholder="Adınızı ve Soyadınızı Giriniz"
+                   oninput="this.value = this.value.replace(/[^A-Za-zğüşöçİĞÜŞÖÇ\s]/g, '')">
+            <div class="invalid-feedback">Lütfen sadece harflerden oluşan bir ad soyad giriniz.</div>
+        </div>
+    </div>
+
+    <!-- Kart Numarası -->
+    <div class="mb-3">
+        <label asp-for="KartNumarasi" class="form-label">Kart Numarası:</label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
+            <input asp-for="KartNumarasi" type="text" class="form-control" maxlength="11" pattern="\d*"
+                   placeholder="16 Haneli Kart Numarası"
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+            <div class="invalid-feedback">Lütfen geçerli bir kart numarası giriniz.</div>
+        </div>
+    </div>
+
+    <!-- Son Kullanma Tarihi -->
+    <div class="mb-3">
+        <label asp-for="SonKulTar" class="form-label">Son Kullanma Tarihi:</label>
+        <input asp-for="SonKulTar" type="month" class="form-control" required>
+        <div class="invalid-feedback">Lütfen son kullanma tarihini seçiniz.</div>
+    </div>
+
+    <!-- CVV -->
+    <div class="mb-3">
+        <label asp-for="Cvv" class="form-label">CVV:</label>
+        <input asp-for="Cvv" type="password" class="form-control" maxlength="3" pattern="\d*"
+               placeholder="3 Haneli Güvenlik Kodu"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+        <div class="invalid-feedback">Lütfen geçerli bir CVV giriniz.</div>
+    </div>
+
+    <!-- Emlakçı İsmi -->
+    <div class="mb-3">
+        <label asp-for="emlakci" class="form-label">Emlakçı İsmi:</label>
+        <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-building"></i></span>
+            <input asp-for="emlakci" type="text" class="form-control" required pattern="[A-Za-zğüşöçİĞÜŞÖÇ\s]+"
+                   placeholder="Emlakçının İsmini Giriniz"
+                   oninput="this.value = this.value.replace(/[^A-Za-zğüşöçİĞÜŞÖÇ\s]/g, '')">
+            <div class="invalid-feedback">Lütfen sadece harflerden oluşan bir emlakçı ismi giriniz.</div>
+        </div>
+    </div>
+
+    <!-- Emlak Numarası -->
+    <div class="mb-3">
+        <label asp-for="ilanNo" class="form-label">Emlak Numarası:</label>
+        <input asp-for="ilanNo" type="text" class="form-control" pattern="\d*"
+               placeholder="Emlak Numarasını Giriniz"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+        <div class="invalid-feedback">Lütfen geçerli bir emlak numarası giriniz.</div>
+    </div>
+
+    <!-- Emlak Türü -->
+    <div class="mb-3">
+        <label asp-for="EmlakTuru" class="form-label">Emlak Türü:</label>
+        <select asp-for="EmlakTuru" class="form-select" required>
+            <option value="" selected disabled>Seçiniz</option>
+            <option value="daire">Daire</option>
+            <option value="villa">Villa</option>
+            <option value="işyeri">İşyeri</option>
+            <option value="arsa">Arsa</option>
+        </select>
+        <div class="invalid-feedback">Lütfen bir emlak türü seçiniz.</div>
+    </div>
+
+    <!-- Kiralama Süresi -->
+    <div class="mb-3">
+        <label asp-for="KiralamaSuresi" class="form-label">Kiralama Süresi (Ay):</label>
+        <input asp-for="KiralamaSuresi" type="number" class="form-control" min="1" max="60"
+               placeholder="Kiralama Süresini Giriniz (1-60 Ay)" required>
+        <div class="invalid-feedback">Lütfen 1-60 ay arasında bir süre giriniz.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Odemelerim","Admin")';">İptal</button>
+</form>
+            </div>
+        </div>
+    </div>

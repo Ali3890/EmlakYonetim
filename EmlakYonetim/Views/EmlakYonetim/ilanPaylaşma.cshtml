@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "ilanPaylaşma";
+}
+
+@model IlanPaylasma
+
+<h1>ilan Paylaşma</h1>
+
+
+
+<form asp-action="ilanPaylaşma" asp-controller="EmlakYonetim" method="post">
+    <div class="form-group">
+        <label asp-for="Foto" class="control-label"></label>
+        <input asp-for="Foto" type="file" class="form-control" /> 
+    </div> 
+
+    <div class="form-group">
+        <label asp-for="Il" class="control-label">İl</label> 
+        <input asp-for="Il" class="form-control" /> 
+        
+    </div>
+
+    <div class="form-group"> 
+        <label asp-for="Ilce" class="control-label"></label> 
+        <input asp-for="Ilce" class="form-control" /> 
+       
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Adres" class="control-label">Adres</label>
+        <input asp-for="Adres" class="form-control" />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IlanTarihi" class="control-label">İlan Tarihi</label>
+        <input asp-for="IlanTarihi" class="form-control" type="date" />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EmlakTipi" class="control-label">EmlakTipi</label>
+        <select asp-for="EmlakTipi" required class="form-control">
+            <option>Seçiniz</option>
+            <option value="0">Satılık</option>
+            <option value="1">Kiralık</option>
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Kategori" class="control-label">Kategori</label>
+        <select asp-for="OdaSayisi" required class="form-control">
+            <option>Seçiniz</option>
+            <option value="0">Ev</option>
+            <option value="1">Arsa</option>
+            <option value="2">Dükkan</option>
+            <option value="3">Villa</option>
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MetreKare" class="control-label">MetreKare</label>
+        <input asp-for="MetreKare" class="form-control" />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BinaYasi" class="control-label">Bina Yaşı</label>
+        <input asp-for="BinaYasi" class="form-control" />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OdaSayisi" class="control-label">Oda Sayısı</label>
+        <select asp-for="OdaSayisi" required class="form-control">
+            <option>Seçiniz</option>
+            <option value="0">1+1</option>
+            <option value="1">2+1</option>
+            <option value="2">3+1</option>
+            <option value="3">4+1</option>
+            <option value="4">5+1</option>
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Fiyat" class="control-label">Fiyat</label>
+        <input asp-for="Fiyat" class="form-control" />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Aciklama" class="control-label">Açıklama</label>
+        <textarea asp-for="Aciklama" class="form-control" required cols="10" rows="3"></textarea>
+
+    </div>
+
+    <div class="form-group"> 
+        <input type="submit" value="Kaydet" class="btn btn-primary" /> 
+    </div> 
+    
+</form>
+<div> <a asp-action="Index">Geri Dön</a> </div>

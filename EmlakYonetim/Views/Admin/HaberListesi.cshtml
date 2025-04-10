@@ -1,0 +1,97 @@
+﻿@model PagedList.Core.IPagedList<EmlakYonetim.Models.Haber>
+@{
+    ViewData["Title"] = "HaberListesi";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Haber Listesi</h1>
+
+<form asp-action="HaberListesi" method="get">
+    <div class="form-group">
+        <input type="text" name="arama" class="form-control" placeholder="Ara..." value="@ViewData["arama"]" />
+    </div>
+    <button type="submit" class="btn btn-primary">Ara</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Özet</th>
+            <th>Yayın Tarihi</th>
+            <th>Fotoğraf</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var haber in Model)
+        {
+            <tr>
+                <td>@haber.Baslik</td>
+                <td>@haber.Ozet</td>
+                <td>@haber.YayinTarihi.ToShortDateString()</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(haber.FotoUrl))
+                    {
+                        <img src="@haber.FotoUrl" alt="Haber Fotoğrafı" class="img-thumbnail" width="100" />
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("HaberDuzenle", new { id = haber.ID })" class="btn btn-warning">Düzenle</a>
+
+
+                    <a href="@Url.Action("HaberSil", new { id = haber.ID })" class="btn btn-danger" onclick="return confirm('Bu haberi silmek istediğinizden emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Sayfalama Kontrolleri -->
+<div class="text-center">
+    <ul class="pagination">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("HaberListesi", new { page = Model.PageNumber - 1, arama = ViewData["arama"] })">Önceki</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link">Önceki</span>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            if (i == Model.PageNumber)
+            {
+                <li class="page-item active">
+                    <span class="page-link">@i</span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("HaberListesi", new { page = i, arama = ViewData["arama"] })">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("HaberListesi", new { page = Model.PageNumber + 1, arama = ViewData["arama"] })">Sonraki</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link">Sonraki</span>
+            </li>
+        }
+    </ul>
+</div>
+
+

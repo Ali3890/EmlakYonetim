@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+@model Kullanici
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KayitOl Form</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h3 class="text-center mt-5"></h3>
+                <form style="width:40%; position:absolute;margin-left:auto%;margin-top:5%;" class="p-4 p-md-5 border rounded-3 bg-body-tertiary" asp-controller="Login" asp-action="KayitOl" method="post">
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ad</font></font></label>
+                        <br>
+                        <input asp-for="Ad" type="text" class="form-control" required>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Soyad</font></font></label>
+                        <br>
+                        <input asp-for="Soyad" type="text" class="form-control" required>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">E-posta adresi</font></font></label>
+                        <br>
+                        <input asp-for="ePosta" type="email" class="form-control" id="floatingInput" placeholder="isim@example.com" required>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label for="floatingInput"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Telefon</font></font></label>
+                        <br>
+                        <input asp-for="Telefon" type="text" class="form-control" required>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label asp-for="Sifre"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sifre</font></font></label>
+                        <br>
+                        <input asp-for="Sifre" type="password" class="form-control" id="floatingPassword" placeholder="Sifre" required>
+
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kayıt Ol</font></font></button>
+                    <hr class="my-4">
+                    <small class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kayıt ol'a tıklayarak kullanım şartlarını kabul etmiş olursunuz.</font></font></small>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

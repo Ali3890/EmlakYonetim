@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Profil";
+}
+
+@model Kullanici
+
+<h2>Profilim</h2>
+
+
+<form asp-controller="EmlakYonetim" asp-action="Profil" method="post">
+    <div class="form-group">
+        <label asp-for="Ad">Ad</label>
+        <input asp-for="Ad" type="text" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Soyad">Soyad</label>
+        <input asp-for="Soyad" type="text" class="form-control"  required />
+    </div>
+    <div class="form-group">
+        <label asp-for="ePosta">E-posta</label>
+        <input asp-for="ePosta" type="email" class="form-control"  required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Telefon">Telefon</label>
+        <input asp-for="Telefon" type="tel" class="form-control"  required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Sifre">Sifre</label>
+        <input asp-for="Sifre" type="password" class="form-control"  required />
+    </div>
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>
+

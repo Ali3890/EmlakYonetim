@@ -1,0 +1,26 @@
+﻿@model EmlakYonetim.Models.Haber
+@{
+    ViewData["Title"] = "HaberEkle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Haber Ekle</h2>
+
+<form asp-action="HaberEkle" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Baslik">Başlık</label>
+        <input type="text" class="form-control" asp-for="Baslik" />
+        <span asp-validation-for="Baslik" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Ozet">Özet</label>
+        <textarea class="form-control" asp-for="Ozet"></textarea>
+        <span asp-validation-for="Ozet" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FotoUrl">Fotoğraf</label>
+        <input asp-for="FotoUrl" type="file" class="form-control" name="foto" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Ekle</button>
+</form>
+
